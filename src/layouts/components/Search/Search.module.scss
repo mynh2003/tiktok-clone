@@ -1,0 +1,100 @@
+.search-container{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(22, 24, 35, 0.06);
+    border-radius: 92px;
+    overflow: hidden;
+    z-index: 1;
+    margin: 0px;
+
+    input {
+        flex: 1;;
+        background-color: transparent;
+        caret-color: var(--primary);
+        color: var(--text-color);
+        // &::placeholder{
+        //     color: var(--text-color);
+        // }
+
+    }
+
+    &:hover{
+        outline: 1px solid #C5C6C9;  
+        .search-icon{
+            fill: rgb(22, 24, 35, 0.75);
+        }
+        .search-btn{
+            background-color: rgba(22, 24, 35, 0.06);
+        }
+
+    }
+    .search-icon-active {
+        fill: rgba(22, 24, 35, 0.75);
+    }
+    
+    &:focus-within {
+        outline: 1px solid #C5C6C9; 
+    }
+
+    .span-spliter{
+        width: 1px;
+        height: 28px;
+        margin: -3px 0px;
+        background: rgba(22, 24, 35, 0.12);
+    }   
+
+    .search-btn {
+        font-size: 0px;
+        padding: 11px 16px 11px 12px;
+        margin: -12px -16px -12px 0px;
+        background-color: transparent;
+        border-top-right-radius: var(--search-border-radius);
+        border-bottom-right-radius: var(--search-border-radius);
+        cursor: pointer;
+    }
+    .reset-search-btn{
+        display: flex;
+    }
+    .loading-icon{
+        display: flex;
+        margin: 0 16px;
+        color: rgba(22, 24, 35, 0.34);
+        animation: spinner 0.8s linear infinite;
+    }
+
+    @keyframes spinner{
+        from{
+            transform: rotate(0);
+        }
+        to{
+            transform: rotate(360deg);
+        }
+    }
+}
+
+.search-result{
+    width: 500px;
+
+    .ul-search{
+        width: 100%;
+        max-height: min(-156px + 100vh, 734px);
+        overflow: hidden auto;
+        list-style-type: none;
+        padding-inline-start: 0px;
+        padding-top: 8px;
+        background: var(--white);
+    }
+
+    .search-title{
+        height: 30px;
+        padding: 5px 12px;
+        font-size: 1.4rem;
+        line-height: 18px;
+        font-weight: 600;
+        color: rgba(22, 24, 35, 0.5);
+    }
+}
+

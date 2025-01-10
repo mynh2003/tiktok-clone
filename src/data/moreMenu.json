@@ -1,0 +1,213 @@
+{
+  "defaultMenu": [
+    {
+      "icon": "ToolsForCreatorsIcon",
+      "title": "Công cụ dành cho nhà sáng tạo"
+    },
+    {
+      "icon": "LanguageIcon",
+      "title": "Tiếng Việt",
+      "children": {
+        "isHeader": true,
+        "itemClass": "item-language",
+        "title": "Ngôn ngữ",
+        "data": [
+          { "code": "vn", "title": "Tiếng Việt" },
+          { "code": "en", "title": "English" },
+          { "code": "fr", "title": "Français" },
+          { "code": "de", "title": "Deutsch" },
+          { "code": "es", "title": "Español" },
+          { "code": "it", "title": "Italiano" },
+          { "code": "ja", "title": "日本語" },
+          { "code": "ko", "title": "한국어" },
+          { "code": "zh", "title": "中文 (简体)" },
+          { "code": "zh-tw", "title": "中文 (繁體)" },
+          { "code": "ar", "title": "العربية" },
+          { "code": "ru", "title": "Русский" },
+          { "code": "pt", "title": "Português" },
+          { "code": "hi", "title": "हिन्दी" },
+          { "code": "th", "title": "ไทย" },
+          { "code": "ms", "title": "Bahasa Melayu" },
+          { "code": "id", "title": "Bahasa Indonesia" },
+          { "code": "tr", "title": "Türkçe" },
+          { "code": "pl", "title": "Polski" },
+          { "code": "sv", "title": "Svenska" },
+          { "code": "da", "title": "Dansk" },
+          { "code": "fi", "title": "Suomi" },
+          { "code": "no", "title": "Norsk" },
+          { "code": "nl", "title": "Nederlands" },
+          { "code": "el", "title": "Ελληνικά" },
+          { "code": "he", "title": "עברית" },
+          { "code": "ur", "title": "اردو" },
+          { "code": "bn", "title": "বাংলা" },
+          { "code": "fa", "title": "فارسی" },
+          { "code": "sw", "title": "Kiswahili" },
+          { "code": "tl", "title": "Filipino" },
+          { "code": "uk", "title": "Українська" },
+          { "code": "cs", "title": "Čeština" },
+          { "code": "ro", "title": "Română" },
+          { "code": "hu", "title": "Magyar" },
+          { "code": "bg", "title": "Български" },
+          { "code": "sr", "title": "Српски" },
+          { "code": "sk", "title": "Slovenčina" },
+          { "code": "hr", "title": "Hrvatski" },
+          { "code": "et", "title": "Eesti" },
+          { "code": "lv", "title": "Latviešu" },
+          { "code": "lt", "title": "Lietuvių" }
+        ]
+      }
+    },
+    {
+      "icon": "FeedbackAndHelpIcon",
+      "title": "Phản hồi và trợ giúp",
+      "to": "/feedback"
+    },
+    {
+      "icon": "ThemeIcon",
+      "title": "Chế độ tối",
+      "children": {
+        "isHeader": false,
+        "title": "Chế độ tối",
+        "data": [
+          {
+            "icon": "BackBtnIcon",
+            "title": "Chế độ tối"
+          },
+          {
+            "icon": "CheckIcon",
+            "code": "auto",
+            "title": "Sử dụng chủ đề của thiết bị",
+            "isCheck": false,
+            "sparate": true
+          },
+          {
+            "icon": "CheckIcon",
+            "code": "dark",
+            "title": "Chế độ tối",
+            "isCheck": false
+          },
+          {
+            "icon": "CheckIcon",
+            "code": "light",
+            "title": "Chế độ sáng",
+            "isCheck": true
+          }
+        ]
+      }
+    }
+  ],
+  "userMenu": [
+    {
+      "icon": "ProfileIcon",
+      "title": "Xem hồ sơ"
+    },
+    {
+      "icon": "CoinTiktokIcon",
+      "title": "Nhận Xu"
+    },
+    {
+      "icon": "ToolsForCreatorsIcon",
+      "title": "Công cụ dành cho nhà sáng tạo"
+    },
+    {
+      "icon": "SettingIcon",
+      "title": "Cài đặt"
+    },
+    {
+      "icon": "LanguageIcon",
+      "title": "Tiếng Việt",
+      "children": {
+        "isHeader": true,
+        "itemClass": "item-language",
+        "title": "Ngôn ngữ",
+        "data": [
+          { "code": "vn", "title": "Tiếng Việt" },
+          { "code": "en", "title": "English" },
+          { "code": "fr", "title": "Français" },
+          { "code": "de", "title": "Deutsch" },
+          { "code": "es", "title": "Español" },
+          { "code": "it", "title": "Italiano" },
+          { "code": "ja", "title": "日本語" },
+          { "code": "ko", "title": "한국어" },
+          { "code": "zh", "title": "中文 (简体)" },
+          { "code": "zh-tw", "title": "中文 (繁體)" },
+          { "code": "ar", "title": "العربية" },
+          { "code": "ru", "title": "Русский" },
+          { "code": "pt", "title": "Português" },
+          { "code": "hi", "title": "हिन्दी" },
+          { "code": "th", "title": "ไทย" },
+          { "code": "ms", "title": "Bahasa Melayu" },
+          { "code": "id", "title": "Bahasa Indonesia" },
+          { "code": "tr", "title": "Türkçe" },
+          { "code": "pl", "title": "Polski" },
+          { "code": "sv", "title": "Svenska" },
+          { "code": "da", "title": "Dansk" },
+          { "code": "fi", "title": "Suomi" },
+          { "code": "no", "title": "Norsk" },
+          { "code": "nl", "title": "Nederlands" },
+          { "code": "el", "title": "Ελληνικά" },
+          { "code": "he", "title": "עברית" },
+          { "code": "ur", "title": "اردو" },
+          { "code": "bn", "title": "বাংলা" },
+          { "code": "fa", "title": "فارسی" },
+          { "code": "sw", "title": "Kiswahili" },
+          { "code": "tl", "title": "Filipino" },
+          { "code": "uk", "title": "Українська" },
+          { "code": "cs", "title": "Čeština" },
+          { "code": "ro", "title": "Română" },
+          { "code": "hu", "title": "Magyar" },
+          { "code": "bg", "title": "Български" },
+          { "code": "sr", "title": "Српски" },
+          { "code": "sk", "title": "Slovenčina" },
+          { "code": "hr", "title": "Hrvatski" },
+          { "code": "et", "title": "Eesti" },
+          { "code": "lv", "title": "Latviešu" },
+          { "code": "lt", "title": "Lietuvių" }
+        ]
+      }
+    },
+    {
+      "icon": "FeedbackAndHelpIcon",
+      "title": "Phản hồi và trợ giúp",
+      "to": "/feedback"
+    },
+    {
+      "icon": "ThemeIcon",
+      "title": "Chế độ tối",
+      "children": {
+        "isHeader": false,
+        "title": "Chế độ tối",
+        "data": [
+          {
+            "icon": "BackBtnIcon",
+            "title": "Chế độ tối"
+          },
+          {
+            "icon": "CheckIcon",
+            "code": "auto",
+            "title": "Sử dụng chủ đề của thiết bị",
+            "isCheck": false,
+            "sparate": true
+          },
+          {
+            "icon": "CheckIcon",
+            "code": "dark",
+            "title": "Chế độ tối",
+            "isCheck": false
+          },
+          {
+            "icon": "CheckIcon",
+            "code": "light",
+            "title": "Chế độ sáng",
+            "isCheck": true
+          }
+        ]
+      }
+    },
+    {
+      "icon": "LogOutIcon",
+      "title": "Đăng xuất",
+      "sparate": true
+    }
+  ]
+}

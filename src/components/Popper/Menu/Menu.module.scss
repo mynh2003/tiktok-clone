@@ -1,0 +1,97 @@
+.menu-item{
+    min-width: 223px;
+
+    .pad0{
+        padding: 0;
+    }
+}
+
+// Header
+.header {
+    display: flex;
+    align-items: center;
+}
+.back-btn {
+    height: 50px;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+.back-icon-btn {
+    margin-left: 28px;
+    width: 20px;
+    height: 20px;
+    
+}
+.header-title {
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+// Menu items
+
+.list-item {
+    max-height: 590px;
+    min-width: 223px;
+    padding: 8px 0px;
+    margin: 0px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+    list-style: none;
+    overflow-y: auto;
+    
+}
+
+.item-container {
+    padding: 0px;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(22, 24, 35);
+    
+    cursor: pointer;
+
+    
+}
+
+// Custom li
+.item-content{
+    display: flex;
+    white-space: nowrap;
+    flex-direction: row;
+    width: 100%;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 10px 8px 10px 16px;
+    gap: 8px;
+    color: rgb(22, 24, 35);
+
+    &:hover{
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
+
+.item-language{
+    font-weight: 400;
+    font-size: 14px;
+    padding: 10px 24px;
+    font-family: TikTokDisplayFont;
+    background: transparent;
+    
+    &:hover{
+        background: rgba(22, 24, 35, 0.06);
+    }
+}
+.icon{
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+}
+
+.sparate{
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+}
