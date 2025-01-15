@@ -47,8 +47,8 @@ function Search() {
 
         const fetchApi = async () => {
             setLoading(true);
-            const result = await searchService.search(debounceValue, 'more');
-            setSearchResult(result);
+            const result = await searchService.search(debounceValue);
+            setSearchResult(result.user_list);
             setLoading(false);
         };
 
@@ -66,7 +66,7 @@ function Search() {
                         <ul className={styles['ul-search']}>
                             <h4 className={styles['search-title']}>Tài khoản</h4>
                             {searchResult.map((result) => (
-                                <AccountItem key={result.id} data={result} />
+                                <AccountItem key={result.id} data={result.user} />
                             ))}
                         </ul>
                     </PopperWrapper>

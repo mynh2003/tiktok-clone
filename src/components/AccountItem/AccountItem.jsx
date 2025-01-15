@@ -7,17 +7,21 @@ function AccountItem({ data }) {
     const navigate = useNavigate();
 
     const handleRedirect = () => {
-        navigate(`/@${data.nickname}`);
+        navigate(`/@${data.uniqueId}`);
     };
     return (
         <li className={styles['wrapper']} onClick={handleRedirect}>
-            <img className={styles['avatar']} src={data.avatar} alt={data.full_name} />
+            <img className={styles['avatar']} src={data.avatarThumb} alt={data.nickname} />
             <div className={styles['info']}>
                 <h4 className={styles['user-name']}>
-                    {data.nickname}
-                    <span className={styles['verify-badge']}>{data.tick && <VerifyBadge />}</span>
+                    {data.uniqueId}
+                    <span className={styles['verify-badge']}>
+                        {(data.verified || data.id === '7162852073737896987' || data.id === '6656026287733751810') && (
+                            <VerifyBadge />
+                        )}
+                    </span>
                 </h4>
-                <p className={styles['name']}>{data.full_name}</p>
+                <p className={styles['name']}>{data.nickname}</p>
             </div>
         </li>
     );

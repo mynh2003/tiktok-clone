@@ -1,5 +1,162 @@
-.wrapper{
+.side-nav-container{
+    position: relative;
+    height: 100%;
     width: 240px;
+}
+.scroll-container{
+    overflow: hidden auto;
+    overscroll-behavior-y: contain;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    perspective-origin: right top;
+    top: 60px;
+    bottom: 0px;
+    background: rgb(255, 255, 255);
+    position: fixed;
+    z-index: 9;
+    padding-right: 8px;
+
+    &:hover .scroll-bar{
+        opacity: 1;
+    }
+
+    /* Ẩn thanh cuộn mặc định */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE và Edge */
+    
+    &::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+    
+}
+
+.wrapper{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
     padding: 20px 0px 26px 8px;
- 
+    overflow: auto;
+    align-items: stretch;
+}
+.following-container{
+    padding: 16px 0px;
+    color: rgba(22, 24, 35, 0.75);
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    position: relative;
+
+    &::before{
+        content: "";
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        top: 0px;
+        height: 1px;
+        background: rgba(22, 24, 35, 0.12);
+        transform: scaleY(0.5);
+    }
+
+    .title{
+        padding: 0px 8px;
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+    }
+
+    .following-see-more{
+        padding: 0px 8px;
+        margin-top: 8px;
+        font-weight: 600;
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        background: transparent;
+        color: var(--primary);
+        border: none;
+        cursor: pointer;
+    }
+}
+.footer-container{
+    position: relative;
+    padding-top: 16px;
+    padding-left: 8px;
+
+    &::before{
+        content: "";
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        top: 0px;
+        height: 1px;
+        background: rgba(22, 24, 35, 0.12);
+        transform: scaleY(0.5);
+    }
+
+    .footer-banner {
+        padding-right: 8px;
+        height: 50px;
+        text-align: center;
+        position: relative;
+        margin-bottom: 30px;
+    }
+    .footer-banner > a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .footer-banner-image {
+        height: 52px;
+        border-radius: 8px;
+        display: block;
+        user-select: none;
+    }
+    .footer-banner-content {
+        position: absolute;
+        top: 11px;
+        left: 11px;
+        text-align: start;
+        width: 141px;
+        color: rgb(0, 0, 0);
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1.6rem;
+    }
+    .link-list-header {
+        margin-top: 15px;
+        font-size: 1.5rem;
+        line-height: 2.2rem;
+        font-family: TikTokDisplayFont;
+        font-weight: 700;
+        color: rgba(22, 24, 35, 0.5);
+        cursor: pointer;
+    }
+    .span-copy-right{
+        display: inline-block;
+        margin-right: 6px;
+        margin-top: 5px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+        color: rgba(22, 24, 35, 0.5);
+    }
+}
+
+
+.scroll-bar{
+    position: absolute;
+    padding: 0px 4px;
+    top: 0px;
+    transition: opacity 0.5s;
+    opacity: 0;
+    right: 0px;
+    transform-origin: right top;
+    height: 376.029px;
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1) scale(1.68923) translateZ(-0.689232px) translateZ(-2px);
+}
+.scroll-bar-thumb{
+    width: 6px;
+    height: 100%;
+    border-radius: 3px;
+    background: rgba(22, 24, 35, 0.06);
 }

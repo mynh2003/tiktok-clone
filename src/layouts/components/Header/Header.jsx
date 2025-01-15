@@ -56,7 +56,7 @@ function Header() {
                             <div className={styles['user-avatar-container']}>
                                 <img
                                     className={styles['user-avatar']}
-                                    src="https://p9-sign-sg.tiktokcdn.com/aweme/1080x1080/tos-alisg-avt-0068/92a19045081861f2c56e85d8cc64cdc4.jpeg?lk3s=a5d48078&nonce=40490&refresh_token=7af26bb667b9e943262983cc09ea10b8&x-expires=1736323200&x-signature=XygxEPfHdeIfHFq9wlTlp5we6%2Bo%3D&shp=a5d48078&shcp=81f88b70"
+                                    src="https://p16-sign-sg.tiktokcdn.com/aweme/720x720/tos-alisg-avt-0068/1a2dda176747b41a91722aec42faa61f.jpeg?lk3s=a5d48078&nonce=79179&refresh_token=67ddd435229b2ba49bc36dee2523b4bc&x-expires=1736694000&x-signature=bA6w%2B3l6viMg9FxtiRuR8d5QZdU%3D&shp=a5d48078&shcp=81f88b70"
                                     alt=""
                                 />
                             </div>
