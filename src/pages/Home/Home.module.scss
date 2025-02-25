@@ -1,0 +1,15 @@
+.home-page-container{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px auto;
+    width: 100%;
+    min-width: 420px;
+}
+
+.button-download-app{
+    position: fixed;
+    bottom: 0px;
+    margin-bottom: 20px;
+    inset-inline-end: 24px;
+}

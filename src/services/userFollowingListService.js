@@ -1,11 +1,12 @@
 import * as httpRequest from '~/utils/httpRequest';
 
-export const getFollowingList = async (user_id, count = '8') => {
+export const getFollowingList = async (user_id, count = '8', time = 0) => {
     try {
-        const res = await httpRequest.get('/getUserFollowingList', {
+        const res = await httpRequest.get('/user/following', {
             params: {
+                user_id,
                 count,
-                user_id
+                time,
             },
         });
         return res.data;

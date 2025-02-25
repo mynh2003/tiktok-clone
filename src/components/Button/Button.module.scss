@@ -23,14 +23,17 @@
 }
 
 .rounded{
-    font-size: 14px;
-    border-radius: 52px;
-    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 8px;
-    color: rgba(22, 24, 35, 0.75);
-    border-color: rgba(22, 24, 35, 0.12);
-    min-width: 90px;
+    border: 1px solid rgba(22, 24, 35, 0.12);
     height: 32px;
-    padding: 0 8px;
+    padding: 0px 8px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: rgba(22, 24, 35, 0.75);
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 8px;
+    border-radius: 52px;
+    line-height: 30px;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .primary{

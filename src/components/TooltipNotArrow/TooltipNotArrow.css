@@ -1,0 +1,21 @@
+.pd8 > .tippy-content{
+    padding: 8px !important;
+}
+
+.tooltip-wrapper{
+    background-color: transparent !important;
+}
+
+.tooltip-wrapper > .tippy-content{
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    color: var(--white);
+    background: #383838f2;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 12px 24px 0px;
+}
+
+.tooltip-wrapper > .tippy-arrow::before{
+    visibility: hidden;
+}

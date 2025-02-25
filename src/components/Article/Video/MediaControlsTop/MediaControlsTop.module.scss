@@ -1,0 +1,44 @@
+.wrapper {
+    padding: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    transition: opacity 0.3s;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    // &:hover .volume-control{
+    //     display: block;
+    // }
+}
+
+.audio-container {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+}
+
+.volume-container{
+    padding: 8px;
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+    transition: opacity 0.3s;
+
+    
+}
+
+.taskbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+    transition: opacity 0.3s;
+    cursor: pointer;
+}
+
+.visible{
+    opacity: 1;
+}
