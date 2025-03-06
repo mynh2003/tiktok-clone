@@ -8,6 +8,7 @@ import ArrowDownIcon from '~/assets/images/arrow-down-icon.svg?react';
 import VolumeProvider from '~/providers/VolumeProvider';
 import Action from './Action';
 import Video from './Video';
+import Button from '~/components/Button';
 
 function Article() {
     const [articles, setArticles] = useState([]);
@@ -88,20 +89,20 @@ function Article() {
                     ))}
                 </div>
                 <div className={styles['feed-navigation-container']}>
-                    <button
+                    <Button
                         className={styles['action-item-button']}
                         onClick={() => handleScrollButton('up')}
                         disabled={currentIndex === 0}
                     >
                         <ArrowUpIcon style={{ width: '24px', height: '24px' }} />
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         className={styles['action-item-button']}
                         onClick={() => handleScrollButton('down')}
                         disabled={currentIndex === articles.length - 1}
                     >
                         <ArrowDownIcon style={{ width: '24px', height: '24px' }} />
-                    </button>
+                    </Button>
                 </div>
             </div>
         </VolumeProvider>

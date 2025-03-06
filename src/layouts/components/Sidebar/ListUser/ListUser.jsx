@@ -5,7 +5,7 @@ function ListUser({ children }) {
     return <ul className={styles['user-list']}>{children}</ul>;
 }
 
-ListUser.prototype = {
+ListUser.propTypes = {
     children: PropTypes.node.isRequired,
 };
 

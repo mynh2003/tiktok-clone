@@ -15,11 +15,7 @@ function AccountItem({ data }) {
             <div className={styles['info']}>
                 <h4 className={styles['user-name']}>
                     {data.uniqueId}
-                    <span className={styles['verify-badge']}>
-                        {(data.verified || data.id === '7162852073737896987' || data.id === '6656026287733751810') && (
-                            <VerifyBadge />
-                        )}
-                    </span>
+                    <span className={styles['verify-badge']}>{data.verified && <VerifyBadge />}</span>
                 </h4>
                 <p className={styles['name']}>{data.nickname}</p>
             </div>
@@ -27,7 +23,7 @@ function AccountItem({ data }) {
     );
 }
 
-AccountItem.prototype = {
+AccountItem.propTypes = {
     data: PropTypes.object.isRequired,
 };
 

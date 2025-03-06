@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { data, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 import styles from './Video.module.scss';
 import { useVolume } from '~/providers/VolumeProvider';
@@ -67,10 +67,12 @@ function Video({ data, scrollToNext }) {
         videoElement.addEventListener('loadedmetadata', setProgressAnimation);
 
         observer.current = new IntersectionObserver(([entry]) => {
-            if (!videoElement) return;
             const progressBarElapsedElement = progressBarElapsedRef.current;
             const progressBarScrubHeadElement = progressBarScrubHeadRef.current;
+            if (!videoElement || !progressBarElapsedElement || !progressBarScrubHeadElement) return;
+
             const duration = videoElement.duration || 0;
+            if (!isMetadataLoaded || isNaN(duration) || duration <= 0) return;
 
             if (entry.isIntersecting && isMetadataLoaded) {
                 videoElement.play();
@@ -81,8 +83,8 @@ function Video({ data, scrollToNext }) {
                 videoElement.pause();
                 setIsPlay(false);
                 videoElement.currentTime = 0;
-                progressBarElapsedRef.current.style.animation = '';
-                progressBarScrubHeadRef.current.style.animation = '';
+                progressBarElapsedElement.style.animation = '';
+                progressBarScrubHeadElement.style.animation = '';
             }
         });
 
@@ -120,12 +122,12 @@ function Video({ data, scrollToNext }) {
         }
     };
 
-    const PlayPauseProgress = (direction) => {
+    const PlayPauseProgress = (value) => {
         const progressBarElapsedElement = progressBarElapsedRef.current;
         const progressBarScrubHeadElement = progressBarScrubHeadRef.current;
         if (progressBarElapsedElement && progressBarScrubHeadElement) {
-            progressBarElapsedElement.style.animationPlayState = direction;
-            progressBarScrubHeadElement.style.animationPlayState = direction;
+            progressBarElapsedElement.style.animationPlayState = value;
+            progressBarScrubHeadElement.style.animationPlayState = value;
         }
     };
 
@@ -168,7 +170,7 @@ function Video({ data, scrollToNext }) {
                     </div>
                 </div>
                 <div className={styles['media-card-top']}>
-                    <MediaControlsTop isMute={isMute} handleMute={handleMute} hoverVisible={styles['hover-visible']} />
+                    <MediaControlsTop handleMute={handleMute} hoverVisible={styles['hover-visible']} />
                 </div>
                 <div className={styles['media-bottom-top']}>
                     <div className={styles['anchor-tag-container']}>
@@ -236,8 +238,8 @@ function Video({ data, scrollToNext }) {
     );
 }
 
-Video.prototype = {
-    data: PropType.array.isRequired,
-    scrollToNext: PropType.func.isRequired,
+Video.propTypes = {
+    data: PropTypes.array.isRequired,
+    scrollToNext: PropTypes.func.isRequired,
 };
 export default Video;

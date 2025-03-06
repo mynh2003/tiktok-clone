@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 const AutoScrollContext = createContext();
 function AutoScrollProvider({ children }) {
@@ -13,8 +13,8 @@ function AutoScrollProvider({ children }) {
 
 export const useAutoScroll = () => useContext(AutoScrollContext);
 
-AutoScrollProvider.prototype = {
-    children: PropType.node.isRequired,
+AutoScrollProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default AutoScrollProvider;

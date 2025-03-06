@@ -65,8 +65,8 @@ function Search() {
                     <PopperWrapper>
                         <ul className={styles['ul-search']}>
                             <h4 className={styles['search-title']}>Tài khoản</h4>
-                            {searchResult.map((result) => (
-                                <AccountItem key={result.id} data={result.user} />
+                            {searchResult.map((result, index) => (
+                                <AccountItem key={index} data={result.user} />
                             ))}
                         </ul>
                     </PopperWrapper>

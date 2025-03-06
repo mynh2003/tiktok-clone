@@ -7,8 +7,11 @@ import { Wrapper as PopperWrapper } from '~/components/Popper';
 import MenuItem from './MenuItem';
 import Header from './Header';
 import styles from './Menu.module.scss';
+import { useTheme } from '~/providers/ThemeProvider';
 
 function Menu({ children, hideOnClick = false, items = [] }) {
+    const { toggleTheme } = useTheme();
+
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -27,6 +30,9 @@ function Menu({ children, hideOnClick = false, items = [] }) {
                     onClick={() => {
                         if (isParent) {
                             setHistory((prev) => [...prev, item.children]);
+                        }
+                        if ('code' in item) {
+                            toggleTheme(item.code);
                         }
                     }}
                     onBack={history.length > 1 && isFirstItem && !current.isHeader ? handleBack : undefined}
@@ -71,7 +77,7 @@ function Menu({ children, hideOnClick = false, items = [] }) {
     );
 }
 
-Menu.prototype = {
+Menu.propTypes = {
     children: PropTypes.node.isRequired,
     hideOnClick: PropTypes.bool,
     items: PropTypes.array,

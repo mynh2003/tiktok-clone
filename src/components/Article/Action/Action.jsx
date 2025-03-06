@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 import styles from './Action.module.scss';
 
@@ -60,8 +60,8 @@ function Action({ article }) {
     );
 }
 
-Action.prototype = {
-    article: PropType.array,
+Action.propTypes = {
+    article: PropTypes.array,
 };
 
 export default Action;

@@ -11,7 +11,7 @@
     perspective-origin: right top;
     top: 60px;
     bottom: 0px;
-    background: rgb(255, 255, 255);
+    background-color: var(--tiktok-background-color);
     position: fixed;
     z-index: 9;
     padding-right: 8px;
@@ -63,6 +63,7 @@
         font-weight: 600;
         font-size: 1.4rem;
         line-height: 1.8rem;
+        color: var(--text-color-1);
     }
 
     .following-see-more{
@@ -128,7 +129,7 @@
         line-height: 2.2rem;
         font-family: TikTokDisplayFont;
         font-weight: 700;
-        color: rgba(22, 24, 35, 0.5);
+        color: var(--text-color);
         cursor: pointer;
     }
     .span-copy-right{
@@ -138,7 +139,7 @@
         font-weight: 600;
         font-size: 1.2rem;
         line-height: 1.6rem;
-        color: rgba(22, 24, 35, 0.5);
+        color: var(--text-color);
     }
 }
 
@@ -158,5 +159,5 @@
     width: 6px;
     height: 100%;
     border-radius: 3px;
-    background: rgba(22, 24, 35, 0.06);
+    background: var(--tiktok-background-color-1);
 }

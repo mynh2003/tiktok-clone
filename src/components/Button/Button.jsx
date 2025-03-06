@@ -43,7 +43,7 @@ function Button({ children, primary, outline, large, rounded, disabled, to, href
     );
 }
 
-Button.prototype = {
+Button.propTypes = {
     children: PropTypes.node.isRequired,
     primary: PropTypes.bool,
     outline: PropTypes.bool,

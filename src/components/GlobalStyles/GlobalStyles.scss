@@ -3,9 +3,42 @@
 :root{
     --primary: #fe2c55;
     --text-color: #161823;
+    --text-color-1: #161823bf;
+    --text-color-2: #16182357;
+    --text-color-3: #16182380;
     --white: #ffffff;
     --font-family: 'TikTokFont', Arial, Tahoma, sans-serif;
+    --tiktok-background-color: #ffffff;
+    --tiktok-hover-background-color: #16182308;
+    --tiktok-background-color-1: #1618230f;
+    --tiktok-background-color-2: #1618231f;
+    --tiktok-neutral-color:#0000000d;
+    --tiktok-hover-neutral-color:#0000001f;
+
+    --popup-bg-color:var(--tiktok-background-color);
+    --switch-bg-color:var(--tiktok-background-color-2);
+
 }
+[data-theme="dark"] {
+    --primary: #ff4d4d;
+    --text-color: #ffffff; 
+    --text-color-1:#ffffffbf;
+    --text-color-2:#868686ef;
+    --text-color-3: #ffffff80;
+    --tiktok-background-color: #000000; 
+    --tiktok-hover-background-color: #ffffff0a;
+    --tiktok-background-color-1: #ffffff1f;
+    --tiktok-background-color-2: #252525;
+    --tiktok-neutral-color: #ffffff21;
+    --tiktok-hover-neutral-color:#ffffff30;
+
+
+
+
+    --rounded-bg: var(--tiktok-background-color-2);
+    --popup-bg-color:var(--tiktok-background-color-2);
+    --switch-bg-color:var(--tiktok-background-color-1);
+  }
 // Fonts embeded
 
 @font-face {
@@ -58,12 +91,12 @@ html ::-webkit-scrollbar {
 
 html *::-webkit-scrollbar-thumb {
     border-radius: 4px;
-    background-color: rgba(22, 24, 35, .06);
+    background-color: var(--tiktok-background-color-1);
 }
 
 html *::-webkit-scrollbar-track {
     border-radius: 0;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
 }
 
 body{

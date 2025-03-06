@@ -1,5 +1,5 @@
 import HeadlessTippy from '@tippyjs/react/headless';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 import styles from './Popup.module.scss';
 
@@ -49,7 +49,7 @@ function Popup({ children }) {
         </HeadlessTippy>
     );
 }
-Popup.prototype = {
-    children: PropType.node.isRequired,
+Popup.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 export default Popup;

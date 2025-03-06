@@ -1,6 +1,6 @@
 import Tippy from '@tippyjs/react';
 import clsx from 'clsx';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 import './TooltipNotArrow.css';
 
 function TooltipNotArrow({ children, content, visible, className }) {
@@ -17,11 +17,11 @@ function TooltipNotArrow({ children, content, visible, className }) {
     );
 }
 
-TooltipNotArrow.prototype = {
-    children: PropType.node.isRequired,
-    content: PropType.string.isRequired,
-    visible: PropType.bool,
-    className: PropType.string,
+TooltipNotArrow.propTypes = {
+    children: PropTypes.node.isRequired,
+    content: PropTypes.string.isRequired,
+    visible: PropTypes.bool,
+    className: PropTypes.string,
 };
 
 export default TooltipNotArrow;

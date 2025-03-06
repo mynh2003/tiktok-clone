@@ -77,20 +77,17 @@
             "icon": "CheckIcon",
             "code": "auto",
             "title": "Sử dụng chủ đề của thiết bị",
-            "isCheck": false,
             "sparate": true
           },
           {
             "icon": "CheckIcon",
             "code": "dark",
-            "title": "Chế độ tối",
-            "isCheck": false
+            "title": "Chế độ tối"
           },
           {
             "icon": "CheckIcon",
             "code": "light",
-            "title": "Chế độ sáng",
-            "isCheck": true
+            "title": "Chế độ sáng"
           }
         ]
       }
@@ -186,20 +183,17 @@
             "icon": "CheckIcon",
             "code": "auto",
             "title": "Sử dụng chủ đề của thiết bị",
-            "isCheck": false,
             "sparate": true
           },
           {
             "icon": "CheckIcon",
             "code": "dark",
-            "title": "Chế độ tối",
-            "isCheck": false
+            "title": "Chế độ tối"
           },
           {
             "icon": "CheckIcon",
             "code": "light",
-            "title": "Chế độ sáng",
-            "isCheck": true
+            "title": "Chế độ sáng"
           }
         ]
       }

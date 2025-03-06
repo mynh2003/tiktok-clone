@@ -9,20 +9,23 @@ import Search from '../Search';
 import config from '~/config';
 import moreMenu from '~/data/moreMenu.json';
 
-import Logo from '~/assets/images/logo.svg?react';
+import LogoLightIcon from '~/assets/images/logo-light-icon.svg?react';
+import LogoDarkIcon from '~/assets/images/logo-dark-icon.svg?react';
 import MoreMenuIcon from '~/assets/images/more-menu-icon.svg?react';
 import MessageIcon from '~/assets/images/messege-icon.svg?react';
 import PlusIcon from '~/assets/images/plus-icon.svg?react';
+import { useTheme } from '~/providers/ThemeProvider';
 
 function Header() {
     const currentUse = true;
+    const { theme } = useTheme();
 
     return (
         <header className={styles['wrapper']}>
             <div className={styles['inner']}>
                 <div className={styles['left-container']}>
                     <Link to={config.routes.home} className={styles['logo-link']}>
-                        <Logo />
+                        {theme === 'dark' ? <LogoDarkIcon /> : <LogoLightIcon />}
                     </Link>
                 </div>
                 <div className={styles['center-container']}>

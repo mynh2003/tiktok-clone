@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 const VolumeContext = createContext();
 
@@ -12,9 +12,8 @@ function VolumeProvider({ children }) {
 
     const handleVolumeChange = (newVolume) => {
         setVolume(newVolume);
-
+        setIsMute(newVolume <= 0.001);
         localStorage.setItem('volume', newVolume);
-        console.log('volume: ' + volume);
     };
 
     const toggleMute = () => {
@@ -30,8 +29,8 @@ function VolumeProvider({ children }) {
 
 export const useVolume = () => useContext(VolumeContext);
 
-VolumeProvider.prototype = {
-    children: PropType.node.isRequired,
+VolumeProvider.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default VolumeProvider;

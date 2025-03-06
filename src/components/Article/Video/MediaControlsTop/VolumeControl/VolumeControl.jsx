@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 import styles from './VolumeControl.module.scss';
 import { useVolume } from '~/providers/VolumeProvider';
 
-function VolumeControl({ className, isMute, handleMouseEnter, handleMouseLeave, handleMute }) {
-    const { volume, handleVolumeChange } = useVolume();
+function VolumeControl({ className, handleMouseEnter, handleMouseLeave, handleMute }) {
+    const { isMute, volume, handleVolumeChange, toggleMute } = useVolume();
     const progressRef = useRef(null);
     const circleRef = useRef(null);
     const [transformX, setTransformX] = useState(0);
@@ -114,11 +114,11 @@ function VolumeControl({ className, isMute, handleMouseEnter, handleMouseLeave, 
         </div>
     );
 }
-VolumeControl.prototype = {
-    className: PropType.string,
-    isMute: PropType.bool,
-    handleMouseEnter: PropType.func,
-    handleMouseLeave: PropType.func,
-    handleMute: PropType.func,
+VolumeControl.propTypes = {
+    className: PropTypes.string,
+    isMute: PropTypes.bool,
+    handleMouseEnter: PropTypes.func,
+    handleMouseLeave: PropTypes.func,
+    handleMute: PropTypes.func,
 };
 export default VolumeControl;

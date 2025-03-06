@@ -2,7 +2,7 @@
     min-width: 200px;
     padding: 8px 0px;
     border-radius: 8px;
-    background-color: var(--white);
+    background-color: var(--popup-bg-color);
     box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 16px;
     list-style: none;
 }
@@ -14,7 +14,7 @@
     cursor: pointer;
 
     &:hover{
-        background: #16182308;
+        background-color: var(--tiktok-hover-background-color);
     }
 
     .icon-wrapper{
@@ -22,13 +22,13 @@
         width: 24px;
         height: 24px;
         align-items: center;
-        color: #161823;
+        color: var(--text-color);
     }
 
     .item-text{
         display: inline-block;
         height: 24px;
-        color: #161823;
+        color: var(--text-color);
         font-weight: 600;
         font-size: 1.4rem;
         line-height: 2.4rem;
@@ -40,7 +40,8 @@
         display: flex;
     }
     .switch-button{
-        background-color: var(--white);
+        background-color: var(--popup-bg-color);
+
         cursor: pointer;
     }
 
@@ -50,7 +51,7 @@
         height: 24px;
         left: 0px;
         top: 0px;
-        background: #1618231f;
+        background: var(--switch-bg-color);
         border-radius: 100px;
         transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
     }

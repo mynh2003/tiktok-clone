@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
+
 import styles from './Menu.module.scss';
 import BackIcon from '~/assets/images/back-btn-icon.svg?react';
 import Button from '~/components/Button';
@@ -15,7 +15,7 @@ function Header({ title, onBack }) {
     );
 }
 
-Header.prototype = {
+Header.propTypes = {
     title: PropTypes.string.isRequired,
     onBack: PropTypes.func,
 };

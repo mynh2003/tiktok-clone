@@ -20,7 +20,7 @@ function UserItem({ avatar, unique_id, nickname, verified = false }) {
     );
 }
 
-UserItem.prototype = {
+UserItem.propTypes = {
     avatar: PropTypes.string,
     unique_id: PropTypes.string,
     nickname: PropTypes.string,

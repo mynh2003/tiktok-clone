@@ -12,7 +12,7 @@ function HeaderOnly({ children }) {
     );
 }
 
-HeaderOnly.prototype = {
+HeaderOnly.propTypes = {
     children: PropTypes.node.isRequired,
 };
 

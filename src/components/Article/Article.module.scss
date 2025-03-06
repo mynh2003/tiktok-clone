@@ -12,7 +12,8 @@
 
 .slide-container{
     width: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--tiktok-background-color);
+    
     position: relative;
     max-height: calc(-60px + 100vh);
     scroll-snap-type: y mandatory;
@@ -63,17 +64,22 @@
     width: max-content;
     inset: 0px;
     padding-inline-end: 1.6rem;
-}
-.action-item-button{
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #0000000d;
-    border-radius: 50%;
+    background-color: var(--tiktok-background-color);
 
-    &:hover{
-        background-color: #0000001f;
+    .action-item-button{
+        width: 48px;
+        height: 48px;
+        margin-left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--tiktok-neutral-color);
+        color: var(--text-color);
+        border-radius: 50%;
+    
+        &:hover{
+            background-color: var(--tiktok-hover-neutral-color)
+        }
     }
 }
+

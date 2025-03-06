@@ -6,7 +6,7 @@
    transition: background 200ms ease-in-out;
 
    &:hover{
-    background: rgba(22, 24, 35, 0.03);
+    background-color: var(--tiktok-neutral-color);
    }
 }
 .user-avatar{
@@ -48,5 +48,5 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    color: rgba(22, 24, 35, 0.75);
+    color: var(--text-color)
 }

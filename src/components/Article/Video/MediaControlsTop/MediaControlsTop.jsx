@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import clsx from 'clsx';
-import PropType from 'prop-types';
+import PropTypes from 'prop-types';
 
 import styles from './MediaControlsTop.module.scss';
 
@@ -9,10 +9,12 @@ import MutedIcon from '~/assets/images/muted-icon.svg?react';
 import VolumeControl from './VolumeControl';
 import HorizontalTaskbarIcon from '~/assets/images/horizontal-taskbar-icon.svg?react';
 import Popup from './Popup';
+import { useVolume } from '~/providers/VolumeProvider';
 
-function MediaControlsTop({ isMute, handleMute, hoverVisible }) {
+function MediaControlsTop({ handleMute, hoverVisible }) {
     const [isHover, setIsHover] = useState(false);
     const [isActive, setIsActive] = useState(false);
+    const { isMute } = useVolume();
 
     const handleMouseEnter = () => {
         setIsHover(true);
@@ -33,14 +35,12 @@ function MediaControlsTop({ isMute, handleMute, hoverVisible }) {
             setIsActive(false);
         }
     };
-
     return (
         <div className={styles['wrapper']}>
             <div className={styles['audio-container']}>
                 {isHover && !isActive && (
                     <VolumeControl
                         className={styles['volume-control']}
-                        isMute={isMute}
                         handleMouseEnter={handleMouseEnter}
                         handleMouseLeave={handleMouseLeave}
                         handleMute={handleMute}
@@ -71,9 +71,9 @@ function MediaControlsTop({ isMute, handleMute, hoverVisible }) {
     );
 }
 
-MediaControlsTop.prototype = {
-    isMute: PropType.bool,
-    handleMute: PropType.func,
-    hoverVisible: PropType.string,
+MediaControlsTop.propTypes = {
+    isMute: PropTypes.bool,
+    handleMute: PropTypes.func,
+    hoverVisible: PropTypes.string,
 };
 export default MediaControlsTop;
