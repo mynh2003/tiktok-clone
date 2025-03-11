@@ -21,6 +21,22 @@
     }
 
 }
+.button-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.button-content > * + * {
+    margin-left: 5.5px;
+}
+.iconOnly{
+    min-width: 0px !important;
+    width: 40px !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
 
 .rounded{
     border: 1px solid rgba(22, 24, 35, 0.12);
@@ -45,6 +61,24 @@
 
     &:hover{
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
+    }
+}
+.secondary{
+    background-color: var(--tiktok-neutral-color);
+    color: var(--text-color-4);
+}
+.medium{
+    height: 40px;
+    padding: 1px 16px;
+    border-radius: 6px;
+    line-height: 21px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.15px;
+    border: none;
+
+    +.wrapper{
+        margin-left: 0;
     }
 }
 

@@ -103,7 +103,7 @@ function Sidebar() {
                             outlineIcon={<MessageFlyIcon />}
                             isActive={false}
                         />
-                        <MenuItem title="Hồ sơ" to="/@mynh" outlineIcon={<ImgAvatar />} isActive={false} />
+                        <MenuItem title="Hồ sơ" to="/@dsereal" outlineIcon={<ImgAvatar />} isActive={false} />
                     </Menu>
                     <div className={styles['following-container']}>
                         <h2 className={styles['title']}>Các tài khoản Đã follow</h2>

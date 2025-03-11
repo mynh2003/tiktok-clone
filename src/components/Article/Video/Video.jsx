@@ -239,7 +239,7 @@ function Video({ data, scrollToNext }) {
 }
 
 Video.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.object.isRequired,
     scrollToNext: PropTypes.func.isRequired,
 };
 export default Video;

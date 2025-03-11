@@ -12,12 +12,12 @@ import PlusIcon from '~/assets/images/plus-icon.svg?react';
 function Action({ article }) {
     const formatNumber = (num) => {
         if (num >= 1000000) {
-            return Math.floor(num / 100000) / 10 + 'M'; // Làm tròn đến 1 chữ số thập phân nếu cần
+            return Math.floor(num / 100000) / 10 + 'M';
         }
         if (num >= 10000) {
-            return Math.floor(num / 100) / 10 + 'K'; // Làm tròn đến 1 chữ số thập phân nếu cần
+            return Math.floor(num / 100) / 10 + 'K';
         }
-        return num.toString(); // Nếu nhỏ hơn 10,000 thì giữ nguyên
+        return num.toString();
     };
 
     return (
@@ -61,7 +61,7 @@ function Action({ article }) {
 }
 
 Action.propTypes = {
-    article: PropTypes.array,
+    article: PropTypes.object.isRequired,
 };
 
 export default Action;

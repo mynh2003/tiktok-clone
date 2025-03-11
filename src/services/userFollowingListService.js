@@ -1,8 +1,9 @@
-import * as httpRequest from '~/utils/httpRequest';
+import { getV1 } from "~/utils/httpRequest";
+
 
 export const getFollowingList = async (user_id, count = '8', time = 0) => {
     try {
-        const res = await httpRequest.get('/user/following', {
+        const res = await getV1('/user/following', {
             params: {
                 user_id,
                 count,

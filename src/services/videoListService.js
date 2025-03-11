@@ -1,8 +1,9 @@
-import * as httpRequest from '~/utils/httpRequest';
+import { getV1 } from "~/utils/httpRequest";
+
 
 export const videoList = async (keywords, region = 'VN', count = '9') => {
     try {
-        const res = await httpRequest.get('/feed/list', {
+        const res = await getV1('/feed/list', {
             params: {
                 keywords,
                 region,

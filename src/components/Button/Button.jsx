@@ -3,7 +3,22 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './Button.module.scss';
 
-function Button({ children, primary, outline, large, rounded, disabled, to, href, onClick, className, ...passProps }) {
+function Button({
+    children,
+    iconOnly,
+    primary,
+    secondary,
+    medium,
+    outline,
+    large,
+    rounded,
+    disabled,
+    to,
+    href,
+    onClick,
+    className,
+    ...passProps
+}) {
     let Comp = 'button';
 
     const props = {
@@ -29,7 +44,10 @@ function Button({ children, primary, outline, large, rounded, disabled, to, href
 
     const classes = clsx(styles['wrapper'], {
         [className]: className,
+        [styles['iconOnly']]: iconOnly,
         [styles['primary']]: primary,
+        [styles['secondary']]: secondary,
+        [styles['medium']]: medium,
         [styles['outline']]: outline,
         [styles['large']]: large,
         [styles['rounded']]: rounded,
@@ -38,7 +56,7 @@ function Button({ children, primary, outline, large, rounded, disabled, to, href
 
     return (
         <Comp className={classes} {...props}>
-            <span>{children}</span>
+            <span className={styles['button-content']}>{children}</span>
         </Comp>
     );
 }
