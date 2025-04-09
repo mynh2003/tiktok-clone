@@ -15,7 +15,3 @@
     background: #383838f2;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 12px 24px 0px;
 }
-
-.tooltip-wrapper > .tippy-arrow::before{
-    visibility: hidden;
-}

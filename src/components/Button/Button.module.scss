@@ -6,6 +6,7 @@
     font-weight: 700;
     border-radius: 4px;
     background-color: var(--white);
+    color: inherit;
     border: 1px solid transparent; 
     padding: 6px 8px;
     user-select: none;
@@ -30,6 +31,16 @@
 }
 .button-content > * + * {
     margin-left: 5.5px;
+}
+.controlItem{
+    flex: unset;
+    min-width: 48px;
+    height: 32px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
 }
 .iconOnly{
     min-width: 0px !important;
@@ -60,25 +71,37 @@
     background-color: var(--primary);
 
     &:hover{
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), rgb(254, 44, 85);
+        background-color: rgba(234, 40, 78, 1) !important;
     }
 }
 .secondary{
     background-color: var(--tiktok-neutral-color);
     color: var(--text-color-4);
 }
+.mini{
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .medium{
     height: 40px;
     padding: 1px 16px;
     border-radius: 6px;
-    line-height: 21px;
-    font-size: 16px;
+    line-height: 2.1rem;
+    font-size: 1.6rem;
     font-weight: 600;
     letter-spacing: 0.15px;
     border: none;
 
     +.wrapper{
         margin-left: 0;
+    }
+
+    &:hover{
+        background-color: var(--tiktok-hover-neutral-color);
     }
 }
 

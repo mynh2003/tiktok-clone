@@ -8,17 +8,24 @@
     --text-color-3: #16182380;
     --text-color-4: #000000;
     --text-color-5: #121212bf;
+    --text-color-6: #16182399;
     --white: #ffffff;
     --font-family: 'TikTokFont', Arial, Tahoma, sans-serif;
     --tiktok-background-color: #ffffff;
     --tiktok-hover-background-color: #16182308;
     --tiktok-background-color-1: #1618230f;
     --tiktok-background-color-2: #1618231f;
+    --tiktok-background-color-3: #f8f8f8;
     --tiktok-neutral-color:#0000000d;
     --tiktok-hover-neutral-color:#0000001f;
 
     --popup-bg-color:var(--tiktok-background-color);
     --switch-bg-color:var(--tiktok-background-color-2);
+    --bottom-line-bg-color: var(--text-color);
+    --line-bg-color: var( --tiktok-hover-neutral-color);
+    --border-color: #16182333;
+    --switch-control-list-color: #ffffff;
+    --shadow-color: #ffffff;
 
 }
 [data-theme="dark"] {
@@ -28,20 +35,30 @@
     --text-color-2:#868686ef;
     --text-color-3: #ffffff80;
     --text-color-4: #f6f6f6;
+    --text-color-6:#ffffff99;
 
     --tiktok-background-color: #000000; 
     --tiktok-hover-background-color: #ffffff0a;
     --tiktok-background-color-1: #ffffff1f;
     --tiktok-background-color-2: #252525;
+    --tiktok-background-color-3: #2d2d2d;
     --tiktok-neutral-color: #ffffff21;
     --tiktok-hover-neutral-color:#ffffff30;
-
-
+    
+    --ui-sheet-flat-3: #3a3a3a;
+    --ui-image-overlay-white-a20: #ffffff33;
 
 
     --rounded-bg: var(--tiktok-background-color-2);
     --popup-bg-color:var(--tiktok-background-color-2);
     --switch-bg-color:var(--tiktok-background-color-1);
+    --bottom-line-bg-color: #ffffe6;
+    --line-bg-color: var(--tiktok-background-color-1);
+    --border-color: #ffffff00;
+    --switch-control-list-color: #ffffff14;
+    --shadow-color: #121212;
+
+
   }
 // Fonts embeded
 
@@ -106,9 +123,10 @@ html *::-webkit-scrollbar-track {
 body{
     font-family: var(--font-family);
     font-size: 1.6rem;
-    line-height: 1.5;
+    line-height: 1.5rem;
     text-rendering: optimizeSpeed;
     color: var(--text-color);
+    min-height: 100vh;
 }
 
 button, input, [tabindex]{

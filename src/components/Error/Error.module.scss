@@ -1,0 +1,41 @@
+.wrapper {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px auto;
+    min-height: 490px;
+}
+.error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0px auto;
+    text-align: center;
+}
+.error-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 92px;
+    width: 92px;
+    border-radius: 50%;
+    background-color: var(--tiktok-background-color-3);
+    color: var( --text-color-4);
+}
+.title {
+    font-size: 2.4rem;
+    line-height: 3rem;
+    font-weight: 700;
+    margin-top: 24px;
+    color: var(--bottom-line-bg-color);
+}
+.desc {
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+    font-weight: 400;
+    margin-top: 8px;
+    color: var(--text-color-1);
+}

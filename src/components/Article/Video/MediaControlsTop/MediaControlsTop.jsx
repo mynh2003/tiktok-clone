@@ -3,12 +3,12 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import styles from './MediaControlsTop.module.scss';
+import Popup from '~/components/Popup';
 
 import VolumeIcon from '~/assets/images/volume-icon.svg?react';
 import MutedIcon from '~/assets/images/muted-icon.svg?react';
 import VolumeControl from './VolumeControl';
 import HorizontalTaskbarIcon from '~/assets/images/horizontal-taskbar-icon.svg?react';
-import Popup from './Popup';
 import { useVolume } from '~/providers/VolumeProvider';
 
 function MediaControlsTop({ handleMute, hoverVisible }) {

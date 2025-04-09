@@ -1,12 +1,13 @@
 .wrapper{
+    display: flex;
     background-color: var(--tiktok-background-color);
     color: var(--text-color);
 }
 .container{
     display: flex;
+    width: 100%;
     margin-top: 60px;
 }
 .content{
-    flex: 1;
-    min-height: calc(1px + 100vh);
+    width: calc(100% - 240px);
 }

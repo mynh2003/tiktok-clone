@@ -1,0 +1,11 @@
+<svg
+        fill="currentColor"
+        font-size="16px"
+        viewBox="0 0 48 48"
+        xmlns="http://www.w3.org/2000/svg"
+        width="1em"
+        height="1em"
+        class="flip-rtl "
+    >
+        <path d="m19.26 24 13.66-13.67a1 1 0 0 0 0-1.41l-1.84-1.84a1 1 0 0 0-1.41 0L13.46 23.3a1 1 0 0 0 0 1.42l16.2 16.21a1 1 0 0 0 1.42 0l1.84-1.84a1 1 0 0 0 0-1.41L19.26 24Z"></path>
+</svg>
