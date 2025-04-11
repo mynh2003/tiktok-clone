@@ -6,14 +6,17 @@ import * as userPlayListService from '~/services/userPlayListService';
 import ArrowLeftIcon from '~/assets/images/arrow-left-icon.svg?react';
 import ArrowRightIcon from '~/assets/images/arrow-right-icon.svg?react';
 
-function PlayList({ user, stateSelect, feedTabWrapperRef }) {
+function PlayList({ data, stateSelect, feedTabWrapperRef }) {
     const listRef = useRef(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
     const [userPlayList, setUserPlayList] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const user = data?.user;
 
     useEffect(() => {
         if (user) {
+            setIsLoading(true);
             const fetchApi = async () => {
                 try {
                     const resultPlayList = await userPlayListService.userPlayList(user.secUid, 20, 0);
@@ -21,11 +24,18 @@ function PlayList({ user, stateSelect, feedTabWrapperRef }) {
                 } catch (error) {
                     console.error('Error fetching:', error);
                 }
+                setIsLoading(false);
             };
             setUserPlayList([]);
             fetchApi();
         }
     }, [user]);
+
+    useEffect(() => {
+        if (!isLoading && userPlayList?.playList?.length) {
+            checkScroll();
+        }
+    }, [userPlayList, isLoading]);
 
     const checkScroll = () => {
         if (listRef.current) {
@@ -41,6 +51,7 @@ function PlayList({ user, stateSelect, feedTabWrapperRef }) {
                 left: direction === 'left' ? -scrollAmount : scrollAmount,
                 behavior: 'smooth',
             });
+            setTimeout(checkScroll, 300);
         }
     };
 
@@ -49,37 +60,44 @@ function PlayList({ user, stateSelect, feedTabWrapperRef }) {
             feedTabWrapperRef.current.style.marginBottom = '24px';
         }
     };
+
     return (
         <>
-            {stateSelect === 'post' && userPlayList?.playList && (
+            {stateSelect === 'post' && user?.profileTab?.showPlayListTab && (
                 <div className={styles['playlist-container']}>
                     <p className={styles['playlist-title']}>Danh sách phát</p>
                     <div className={styles['list-container']}>
                         <div ref={listRef} onScroll={checkScroll} className={styles['list-inner-container']}>
-                            {userPlayList.playList.map((data, index) => (
-                                <a href="#" key={index}>
-                                    <div className={styles['play-list-card-container']}>
-                                        <div className={styles['play-list-card-cover']}>
-                                            <img src={data.cover} alt="" />
-                                        </div>
-                                        <div className={styles['list-info-container']}>
-                                            <p className={styles['list-name']}>{data.mixName}</p>
-                                            <p className={styles['video-count']}>{data.videoCount} bài đăng</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            ))}
+                            {isLoading
+                                ? Array.from({ length: 3 }).map((_, index) => (
+                                      <div key={index} className={styles['skeleton-card']}></div>
+                                  ))
+                                : userPlayList.playList.map((data, index) => (
+                                      <a href="#" key={index}>
+                                          <div className={styles['play-list-card-container']}>
+                                              <div className={styles['play-list-card-cover']}>
+                                                  <img src={data.cover} alt="" />
+                                              </div>
+                                              <div className={styles['list-info-container']}>
+                                                  <p className={styles['list-name']}>{data.mixName}</p>
+                                                  <p className={styles['video-count']}>{data.videoCount} bài đăng</p>
+                                              </div>
+                                          </div>
+                                      </a>
+                                  ))}
                         </div>
-                        {canScrollLeft && (
+                        {!isLoading && canScrollLeft && (
                             <div className={styles['switch-left']} onClick={() => scrollList('left')}>
                                 <ArrowLeftIcon />
                             </div>
                         )}
-                        <div className={styles['style-shadow']}></div>
-                        {canScrollRight && (
-                            <div className={styles['switch-right']} onClick={() => scrollList('right')}>
-                                <ArrowRightIcon />
-                            </div>
+                        {!isLoading && canScrollRight && (
+                            <>
+                                <div className={styles['style-shadow']}></div>
+                                <div className={styles['switch-right']} onClick={() => scrollList('right')}>
+                                    <ArrowRightIcon />
+                                </div>
+                            </>
                         )}
                     </div>
                     <p className={styles['playlist-title']}>Video</p>

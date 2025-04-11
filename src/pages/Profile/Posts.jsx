@@ -8,13 +8,16 @@ import PlayOutlineIcon from '~/assets/images/play-outline-icon.svg?react';
 import GridErrorIcon from '~/assets/images/grid-error-icon.svg?react';
 import LockIcon from '~/assets/images/lock-icon.svg?react';
 
-function Posts({ formatNumber, user, stateSelect }) {
+function Posts({ formatNumber, data, stateSelect }) {
     const [hoveredId, setHoveredId] = useState(null);
     const [userPosts, setUserPosts] = useState({ videos: [], cursor: 0, hasMore: true });
     const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const user = data?.user;
 
     useEffect(() => {
         if (user) {
+            setIsLoading(true);
             const fetchVideos = async () => {
                 try {
                     const resultPosts = await userPostsService.userPosts(user.uniqueId, user.id, 30, 0);
@@ -27,6 +30,7 @@ function Posts({ formatNumber, user, stateSelect }) {
                 } catch (error) {
                     console.error('Error fetching videos:', error);
                 }
+                setIsLoading(false);
             };
 
             setUserPosts({ videos: [], cursor: 0, hasMore: true });
@@ -68,18 +72,36 @@ function Posts({ formatNumber, user, stateSelect }) {
     };
 
     const loadPosts = () => {
-        switch (stateSelect) {
-            case 'post':
-                return userPosts.videos.length > 0 ? Posts : ErrorNoPost;
-            case 'repost':
+        if (stateSelect === 'post') {
+            if (isLoading) {
+                return PostsSkeleton;
+            } else if (userPosts.videos.length > 0) {
+                return Posts;
+            } else {
                 return ErrorNoPost;
-            case 'liked':
-                return ErrorPrivatePost;
-            default:
-                console.log('Invalid stateSelect');
-                return null;
+            }
         }
+
+        if (stateSelect === 'repost') {
+            return ErrorNoPost;
+        }
+
+        if (stateSelect === 'liked') {
+            return ErrorPrivatePost;
+        }
+
+        return null;
     };
+
+    const PostsSkeleton = (
+        <div className={styles['post-container']}>
+            <div className={styles['post-grid']}>
+                {Array.from({ length: 24 }).map((_, index) => (
+                    <div key={index} className={styles['skeleton-post']}></div>
+                ))}
+            </div>
+        </div>
+    );
 
     const ErrorNoPost = (
         <Error icon={<GridErrorIcon />} title="Không có nội dung" desc="Người dùng này chưa đăng bất kỳ video nào." />
@@ -89,7 +111,7 @@ function Posts({ formatNumber, user, stateSelect }) {
             notMain={true}
             icon={<LockIcon />}
             title="Video người dùng này đã thích đang ở trạng thái riêng tư"
-            desc={`Các video ${user.uniqueId} thích hiện đang ẩn`}
+            desc={`Các video ${user?.uniqueId} thích hiện đang ẩn`}
         />
     );
     const Posts = (

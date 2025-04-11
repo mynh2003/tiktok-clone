@@ -48,6 +48,7 @@ function Profile() {
     const [state, dispatch] = useReducer(reducer, initState);
     const [userInfo, setUserInfo] = useState(null);
     const [isOwnProfile, setIsOwnProfile] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
     const authuser_uniqueid = 'dsereal';
     const { nickname } = useParams();
 
@@ -78,6 +79,7 @@ function Profile() {
     };
 
     useEffect(() => {
+        setIsLoading(true);
         const uniqueId = nickname.replace('@', '');
         const fetchApi = async () => {
             try {
@@ -86,6 +88,7 @@ function Profile() {
             } catch (error) {
                 console.error('Error fetching user info:', error);
             }
+            setIsLoading(false);
         };
 
         setIsOwnProfile(uniqueId === authuser_uniqueid);
@@ -124,258 +127,270 @@ function Profile() {
     return (
         <div className={styles['profile-container']}>
             <div className={styles['profile-wrapper']}>
-                {userInfo && (
-                    <div className={styles['profile-content']}>
-                        <div className={styles['profile-header']}>
-                            <div className={styles['header-left']}>
-                                <img
-                                    className={styles['user-avatar']}
-                                    src={userInfo.user.avatarMedium}
-                                    alt={userInfo.user.uniqueId}
-                                />
-                            </div>
-                            <div className={styles['header-right']}>
-                                <div className={styles['user-identifier-wrapper']}>
-                                    <div className={styles['user-text-wrapper']}>
-                                        <h1 className={styles['uniqueid']}>{userInfo.user.uniqueId}</h1>
-                                        {userInfo.user.verified && <VerifyBadge width="20" height="20" />}
-                                    </div>
-                                    <h2 className={styles['username']}>{userInfo.user.nickname}</h2>
+                <div className={styles['profile-content']}>
+                    <div className={styles['profile-header']}>
+                        {isLoading ? (
+                            <div className={styles['skeleton-profile']}>
+                                <div className={styles['skeleton-avatar']}></div>
+                                <div className={styles['skeleton-title-container']}>
+                                    <div className={styles['skeleton-title']}></div>
+                                    <div className={styles['skeleton-title']}></div>
                                 </div>
-                                <div className={styles['button-pane']}>
-                                    {isOwnProfile ? (
-                                        <>
-                                            <Button primary={true} medium={true}>
-                                                Sửa hồ sơ
-                                            </Button>
-                                            <Button secondary={true} medium={true}>
-                                                Quảng bá bài đăng
-                                            </Button>
-                                            <Button
-                                                secondary={true}
-                                                medium={true}
-                                                iconOnly={true}
-                                                style={{ fontSize: '19px' }}
-                                            >
-                                                <SettingBoldIcon />
-                                            </Button>
-                                            <Button
-                                                secondary={true}
-                                                medium={true}
-                                                iconOnly={true}
-                                                style={{ fontSize: '19px' }}
-                                            >
-                                                <ShareOutlineIcon />
-                                            </Button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            {state.state == 'following' ? (
-                                                <TooltipNotArrow content="Bỏ follow" placement="bottom">
-                                                    <Button
-                                                        {...(state.state === 'following' || state.state === 'friend'
-                                                            ? { secondary: true }
-                                                            : { primary: true })}
-                                                        medium={true}
-                                                        onClick={handleClick}
-                                                    >
-                                                        {(state.state === 'following' || state.state === 'friend') && (
-                                                            <FollowingIcon style={{ fontSize: '1.9rem' }} />
-                                                        )}
-                                                        <div>
-                                                            {state.state === 'following' || state.state === 'friend'
-                                                                ? 'Đang Follow'
-                                                                : state.state === 'follower'
-                                                                ? 'Follow lại'
-                                                                : 'Follow'}
-                                                        </div>
+                            </div>
+                        ) : (
+                            userInfo && (
+                                <>
+                                    <div className={styles['header-left']}>
+                                        <img
+                                            className={styles['user-avatar']}
+                                            src={userInfo.user.avatarMedium}
+                                            alt={userInfo.user.uniqueId}
+                                        />
+                                    </div>
+                                    <div className={styles['header-right']}>
+                                        <div className={styles['user-identifier-wrapper']}>
+                                            <div className={styles['user-text-wrapper']}>
+                                                <h1 className={styles['uniqueid']}>{userInfo.user.uniqueId}</h1>
+                                                {userInfo.user.verified && <VerifyBadge width="20" height="20" />}
+                                            </div>
+                                            <h2 className={styles['username']}>{userInfo.user.nickname}</h2>
+                                        </div>
+                                        <div className={styles['button-pane']}>
+                                            {isOwnProfile ? (
+                                                <>
+                                                    <Button primary={true} medium={true}>
+                                                        Sửa hồ sơ
                                                     </Button>
-                                                </TooltipNotArrow>
+                                                    <Button secondary={true} medium={true}>
+                                                        Quảng bá bài đăng
+                                                    </Button>
+                                                    <Button
+                                                        secondary={true}
+                                                        medium={true}
+                                                        iconOnly={true}
+                                                        style={{ fontSize: '19px' }}
+                                                    >
+                                                        <SettingBoldIcon />
+                                                    </Button>
+                                                    <Button
+                                                        secondary={true}
+                                                        medium={true}
+                                                        iconOnly={true}
+                                                        style={{ fontSize: '19px' }}
+                                                    >
+                                                        <ShareOutlineIcon />
+                                                    </Button>
+                                                </>
                                             ) : (
-                                                <Button
-                                                    {...(state.state === 'following' || state.state === 'friend'
-                                                        ? { secondary: true }
-                                                        : { primary: true })}
-                                                    medium={true}
-                                                    onClick={handleClick}
-                                                >
-                                                    {(state.state === 'following' || state.state === 'friend') && (
-                                                        <FollowingIcon style={{ fontSize: '1.9rem' }} />
+                                                <>
+                                                    {state.state == 'following' ? (
+                                                        <TooltipNotArrow content="Bỏ follow" placement="bottom">
+                                                            <Button
+                                                                {...(state.state === 'following' ||
+                                                                state.state === 'friend'
+                                                                    ? { secondary: true }
+                                                                    : { primary: true })}
+                                                                medium={true}
+                                                                onClick={handleClick}
+                                                            >
+                                                                {(state.state === 'following' ||
+                                                                    state.state === 'friend') && (
+                                                                    <FollowingIcon style={{ fontSize: '1.9rem' }} />
+                                                                )}
+                                                                <div>
+                                                                    {state.state === 'following' ||
+                                                                    state.state === 'friend'
+                                                                        ? 'Đang Follow'
+                                                                        : state.state === 'follower'
+                                                                        ? 'Follow lại'
+                                                                        : 'Follow'}
+                                                                </div>
+                                                            </Button>
+                                                        </TooltipNotArrow>
+                                                    ) : (
+                                                        <Button
+                                                            {...(state.state === 'following' || state.state === 'friend'
+                                                                ? { secondary: true }
+                                                                : { primary: true })}
+                                                            medium={true}
+                                                            onClick={handleClick}
+                                                        >
+                                                            {(state.state === 'following' ||
+                                                                state.state === 'friend') && (
+                                                                <FollowingIcon style={{ fontSize: '1.9rem' }} />
+                                                            )}
+                                                            <div>
+                                                                {state.state === 'following' || state.state === 'friend'
+                                                                    ? 'Đang Follow'
+                                                                    : state.state === 'follower'
+                                                                    ? 'Follow lại'
+                                                                    : 'Follow'}
+                                                            </div>
+                                                        </Button>
                                                     )}
-                                                    <div>
-                                                        {state.state === 'following' || state.state === 'friend'
-                                                            ? 'Đang Follow'
-                                                            : state.state === 'follower'
-                                                            ? 'Follow lại'
-                                                            : 'Follow'}
-                                                    </div>
-                                                </Button>
-                                            )}
 
-                                            <Button secondary={true} medium={true}>
-                                                Tin nhắn
-                                            </Button>
-                                            <Button
-                                                secondary={true}
-                                                medium={true}
-                                                iconOnly={true}
-                                                style={{ fontSize: '19px' }}
-                                            >
-                                                <ShareOutlineIcon />
-                                            </Button>
-                                            <Button
-                                                secondary={true}
-                                                medium={true}
-                                                iconOnly={true}
-                                                style={{ fontSize: '19px' }}
-                                            >
-                                                <HorizontalMoreMenuIcon />
-                                            </Button>
-                                        </>
-                                    )}
-                                </div>
-                                <div className={styles['header-text-container']}>
-                                    <h3 className={styles['count-infos']}>
-                                        <div className={styles['div-number']}>
-                                            <strong>{formatNumber(userInfo.stats.followingCount)}</strong>
-                                            <span>Đang Follow</span>
+                                                    <Button secondary={true} medium={true}>
+                                                        Tin nhắn
+                                                    </Button>
+                                                    <Button
+                                                        secondary={true}
+                                                        medium={true}
+                                                        iconOnly={true}
+                                                        style={{ fontSize: '19px' }}
+                                                    >
+                                                        <ShareOutlineIcon />
+                                                    </Button>
+                                                    <Button
+                                                        secondary={true}
+                                                        medium={true}
+                                                        iconOnly={true}
+                                                        style={{ fontSize: '19px' }}
+                                                    >
+                                                        <HorizontalMoreMenuIcon />
+                                                    </Button>
+                                                </>
+                                            )}
                                         </div>
-                                        <div className={styles['div-number']}>
-                                            <strong>{formatNumber(userInfo.stats.followerCount)}</strong>
-                                            <span>Follower</span>
+                                        <div className={styles['header-text-container']}>
+                                            <h3 className={styles['count-infos']}>
+                                                <div className={styles['div-number']}>
+                                                    <strong>{formatNumber(userInfo.stats.followingCount)}</strong>
+                                                    <span>Đang Follow</span>
+                                                </div>
+                                                <div className={styles['div-number']}>
+                                                    <strong>{formatNumber(userInfo.stats.followerCount)}</strong>
+                                                    <span>Follower</span>
+                                                </div>
+                                                <div className={styles['div-number']}>
+                                                    <strong>{formatNumber(userInfo.stats.heartCount)}</strong>
+                                                    <span>Thích</span>
+                                                </div>
+                                            </h3>
+                                            <h2 className={styles['user-bio']}>
+                                                {userInfo?.user?.signature || 'Chưa có tiểu sử.'}
+                                            </h2>
+                                            {userInfo?.user?.bioLink?.link && (
+                                                <div className={styles['bio-link']}>
+                                                    <a
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        href={formatLink(userInfo.user.bioLink.link)}
+                                                    >
+                                                        <LinkIcon />
+                                                        <span className={styles['span-link']}>
+                                                            {userInfo.user.bioLink.link.replace(/^https?:\/\//, '')}
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            )}
                                         </div>
-                                        <div className={styles['div-number']}>
-                                            <strong>{formatNumber(userInfo.stats.heartCount)}</strong>
-                                            <span>Thích</span>
-                                        </div>
-                                    </h3>
-                                    <h2 className={styles['user-bio']}>
-                                        {userInfo?.user?.signature || 'Chưa có tiểu sử.'}
-                                    </h2>
-                                    {userInfo?.user?.bioLink?.link && (
-                                        <div className={styles['bio-link']}>
-                                            <a
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href={formatLink(userInfo.user.bioLink.link)}
-                                            >
-                                                <LinkIcon />
-                                                <span className={styles['span-link']}>
-                                                    {userInfo.user.bioLink.link.replace(/^https?:\/\//, '')}
-                                                </span>
-                                            </a>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles['profile-main']}>
-                            <div ref={feedTabWrapperRef} className={styles['feed-tab-wrapper']}>
-                                <div className={styles['video-feed-tab']}>
-                                    <div
-                                        ref={addTabRef}
-                                        className={clsx(styles['tab-post'], {
-                                            [styles['select']]: stateSelect == 'post',
-                                        })}
-                                        onMouseEnter={(event) => {
-                                            handleMouseEnter(event);
-                                        }}
-                                        onMouseLeave={handleMouseLeave}
-                                        onClick={(event) => {
-                                            handleSelect({ value: 'post', event });
-                                        }}
-                                    >
-                                        <GirdIcon style={{ fontSize: '20px' }} />
-                                        <span>Video</span>
                                     </div>
-                                    <div
-                                        ref={addTabRef}
-                                        className={clsx(styles['tab-repost'], {
-                                            [styles['select']]: stateSelect == 'repost',
-                                        })}
-                                        onMouseEnter={(event) => {
-                                            handleMouseEnter(event);
-                                        }}
-                                        onMouseLeave={handleMouseLeave}
-                                        onClick={(event) => {
-                                            handleSelect({ value: 'repost', event });
-                                        }}
-                                    >
-                                        <RepostIcon style={{ fontSize: '20px' }} />
-                                        <span>Bài đăng lại</span>
-                                    </div>
-                                    <div
-                                        ref={addTabRef}
-                                        className={clsx(styles['tab-liked'], {
-                                            [styles['select']]: stateSelect == 'liked',
-                                        })}
-                                        onMouseEnter={(event) => {
-                                            handleMouseEnter(event);
-                                        }}
-                                        onMouseLeave={handleMouseLeave}
-                                        onClick={(event) => {
-                                            handleSelect({ value: 'liked', event });
-                                        }}
-                                    >
-                                        <HeartPrivateIcon style={{ fontSize: '20px' }} />
-                                        <span>Đã thích</span>
-                                    </div>
-                                    <div
-                                        ref={bottomLineRef}
-                                        className={styles['bottom-line']}
-                                        style={{ transform: 'translateY(0px)', width: '137px' }}
-                                    ></div>
-                                </div>
-                                {stateSelect == 'post' && (
-                                    <div className={styles['control']}>
-                                        <Button
-                                            className={clsx(styles['control-item'], {
-                                                [styles['active']]: stateControl == 'new',
-                                            })}
-                                            controlItem={true}
-                                            mini={true}
-                                            onClick={() => {
-                                                setSateControl('new');
-                                            }}
-                                        >
-                                            Mới nhất
-                                        </Button>
-                                        <Button
-                                            className={clsx(styles['control-item'], {
-                                                [styles['active']]: stateControl == 'trending',
-                                            })}
-                                            controlItem={true}
-                                            mini={true}
-                                            onClick={() => {
-                                                setSateControl('trending');
-                                            }}
-                                        >
-                                            Thịnh hành
-                                        </Button>
-                                        <Button
-                                            className={clsx(styles['control-item'], {
-                                                [styles['active']]: stateControl == 'old',
-                                            })}
-                                            controlItem={true}
-                                            mini={true}
-                                            onClick={() => {
-                                                setSateControl('old');
-                                            }}
-                                        >
-                                            Cũ nhất
-                                        </Button>
-                                    </div>
-                                )}
-                            </div>
-                            <PlayList
-                                user={userInfo.user}
-                                stateSelect={stateSelect}
-                                feedTabWrapperRef={feedTabWrapperRef}
-                            />
-                            <Posts formatNumber={formatNumber} user={userInfo.user} stateSelect={stateSelect} />
-                        </div>
+                                </>
+                            )
+                        )}
                     </div>
-                )}
+                    <div className={styles['profile-main']}>
+                        <div ref={feedTabWrapperRef} className={styles['feed-tab-wrapper']}>
+                            <div className={styles['video-feed-tab']}>
+                                <div
+                                    ref={addTabRef}
+                                    className={clsx(styles['tab-post'], {
+                                        [styles['select']]: stateSelect == 'post',
+                                    })}
+                                    onMouseEnter={(event) => {
+                                        handleMouseEnter(event);
+                                    }}
+                                    onMouseLeave={handleMouseLeave}
+                                    onClick={(event) => {
+                                        handleSelect({ value: 'post', event });
+                                    }}
+                                >
+                                    <GirdIcon style={{ fontSize: '20px' }} />
+                                    <span>Video</span>
+                                </div>
+                                <div
+                                    ref={addTabRef}
+                                    className={clsx(styles['tab-repost'], {
+                                        [styles['select']]: stateSelect == 'repost',
+                                    })}
+                                    onMouseEnter={(event) => {
+                                        handleMouseEnter(event);
+                                    }}
+                                    onMouseLeave={handleMouseLeave}
+                                    onClick={(event) => {
+                                        handleSelect({ value: 'repost', event });
+                                    }}
+                                >
+                                    <RepostIcon style={{ fontSize: '20px' }} />
+                                    <span>Bài đăng lại</span>
+                                </div>
+                                <div
+                                    ref={addTabRef}
+                                    className={clsx(styles['tab-liked'], {
+                                        [styles['select']]: stateSelect == 'liked',
+                                    })}
+                                    onMouseEnter={(event) => {
+                                        handleMouseEnter(event);
+                                    }}
+                                    onMouseLeave={handleMouseLeave}
+                                    onClick={(event) => {
+                                        handleSelect({ value: 'liked', event });
+                                    }}
+                                >
+                                    <HeartPrivateIcon style={{ fontSize: '20px' }} />
+                                    <span>Đã thích</span>
+                                </div>
+                                <div
+                                    ref={bottomLineRef}
+                                    className={styles['bottom-line']}
+                                    style={{ transform: 'translateY(0px)', width: '137px' }}
+                                ></div>
+                            </div>
+                            {stateSelect == 'post' && (
+                                <div className={styles['control']}>
+                                    <Button
+                                        className={clsx(styles['control-item'], {
+                                            [styles['active']]: stateControl == 'new',
+                                        })}
+                                        controlItem={true}
+                                        mini={true}
+                                        onClick={() => {
+                                            setSateControl('new');
+                                        }}
+                                    >
+                                        Mới nhất
+                                    </Button>
+                                    <Button
+                                        className={clsx(styles['control-item'], {
+                                            [styles['active']]: stateControl == 'trending',
+                                        })}
+                                        controlItem={true}
+                                        mini={true}
+                                        onClick={() => {
+                                            setSateControl('trending');
+                                        }}
+                                    >
+                                        Thịnh hành
+                                    </Button>
+                                    <Button
+                                        className={clsx(styles['control-item'], {
+                                            [styles['active']]: stateControl == 'old',
+                                        })}
+                                        controlItem={true}
+                                        mini={true}
+                                        onClick={() => {
+                                            setSateControl('old');
+                                        }}
+                                    >
+                                        Cũ nhất
+                                    </Button>
+                                </div>
+                            )}
+                        </div>
+                        <PlayList data={userInfo} stateSelect={stateSelect} feedTabWrapperRef={feedTabWrapperRef} />
+                        <Posts formatNumber={formatNumber} data={userInfo} stateSelect={stateSelect} />
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -13,12 +13,14 @@ import Button from '~/components/Button';
 function Article() {
     const [articles, setArticles] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
     const articleRefs = useRef([]);
     const hasMoreArticles = useRef(true);
     const existingIds = useRef(new Set());
 
     useEffect(() => {
         const fetchApi = async () => {
+            setIsLoading(true);
             const result = await videoListService.videoList();
             if (result.length > 0) {
                 setArticles(result);
@@ -26,6 +28,7 @@ function Article() {
             } else {
                 hasMoreArticles.current = false;
             }
+            setIsLoading(false);
         };
 
         fetchApi();
@@ -70,40 +73,55 @@ function Article() {
     const scrollToNext = () => {
         handleScrollButton('down');
     };
-
     return (
         <VolumeProvider>
             <div className={styles['wrapper']}>
                 <div className={styles['slide-container']}>
-                    {articles.map((article, index) => (
-                        <article
-                            key={index}
-                            ref={(el) => (articleRefs.current[index] = el)}
-                            className={styles['slide-item-container']}
-                        >
+                    {isLoading ? (
+                        <article className={styles['slide-item-container']}>
                             <div className={styles['slide-item']}>
-                                <Video data={article} scrollToNext={scrollToNext} />
-                                <Action article={article} />
+                                <div className={styles['skeleton-video']}></div>
+                                <section className={styles['skeleton-action']} style={{ justifyContent: 'center' }}>
+                                    {Array.from({ length: 6 }).map((_, i) => (
+                                        <div key={i} className={styles['action-placeholde']}></div>
+                                    ))}
+                                </section>
                             </div>
                         </article>
-                    ))}
+                    ) : (
+                        articles.map((article, index) => (
+                            <article
+                                key={index}
+                                ref={(el) => (articleRefs.current[index] = el)}
+                                className={styles['slide-item-container']}
+                            >
+                                <div className={styles['slide-item']}>
+                                    <Video data={article} scrollToNext={scrollToNext} />
+                                    <Action article={article} />
+                                </div>
+                            </article>
+                        ))
+                    )}
                 </div>
-                <div className={styles['feed-navigation-container']}>
-                    <Button
-                        className={styles['action-item-button']}
-                        onClick={() => handleScrollButton('up')}
-                        disabled={currentIndex === 0}
-                    >
-                        <ArrowUpIcon style={{ width: '24px', height: '24px' }} />
-                    </Button>
-                    <Button
-                        className={styles['action-item-button']}
-                        onClick={() => handleScrollButton('down')}
-                        disabled={currentIndex === articles.length - 1}
-                    >
-                        <ArrowDownIcon style={{ width: '24px', height: '24px' }} />
-                    </Button>
-                </div>
+
+                {!isLoading && (
+                    <div className={styles['feed-navigation-container']}>
+                        <Button
+                            className={styles['action-item-button']}
+                            onClick={() => handleScrollButton('up')}
+                            disabled={currentIndex === 0}
+                        >
+                            <ArrowUpIcon style={{ width: '24px', height: '24px' }} />
+                        </Button>
+                        <Button
+                            className={styles['action-item-button']}
+                            onClick={() => handleScrollButton('down')}
+                            disabled={currentIndex === articles.length - 1}
+                        >
+                            <ArrowDownIcon style={{ width: '24px', height: '24px' }} />
+                        </Button>
+                    </div>
+                )}
             </div>
         </VolumeProvider>
     );
