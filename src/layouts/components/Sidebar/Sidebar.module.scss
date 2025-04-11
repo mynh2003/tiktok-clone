@@ -20,12 +20,11 @@
         opacity: 1;
     }
 
-    /* Ẩn thanh cuộn mặc định */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE và Edge */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
     
     &::-webkit-scrollbar {
-        display: none; /* Chrome, Safari */
+        display: none; 
     }
     
 }
@@ -76,6 +75,9 @@
         color: var(--primary);
         border: none;
         cursor: pointer;
+    }
+    .text-loading{
+        color: var(--text-color);
     }
 }
 .footer-container{

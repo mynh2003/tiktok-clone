@@ -1,16 +1,17 @@
-import { getV1 } from "~/utils/httpRequest";
+import { getV2 } from "~/utils/httpRequest";
 
 
-export const getFollowingList = async (user_id, count = '8', time = 0) => {
+export const getFollowingList = async ({ secUid, count = 5, minCursor = 0, maxCursor = 0 }) => {
     try {
-        const res = await getV1('/user/following', {
+        const res = await getV2('/user/followings', {
             params: {
-                user_id,
+                secUid,
                 count,
-                time,
+                minCursor,
+                maxCursor
             },
         });
-        return res.data;
+        return res;
     } catch (error) {
         console.log(error);
         throw error;

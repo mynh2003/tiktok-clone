@@ -19,16 +19,16 @@ import ImgAvatar from './Menu/ImgAvatar';
 import { useEffect, useState } from 'react';
 
 function Sidebar() {
-    const userId = '7039144695448650754';
+    const secUid = 'MS4wLjABAAAAFu6NjHZ7-foxecDeFSkKViwErrl6-JneIuyZLbK6JPAf9N1wGrtb9GNo1TLBlEBK';
     const [isLoading, setIsLoading] = useState(false);
-    const [hasMore, setHasMore] = useState(false);
     const [userFollowingList, setUserFollowingList] = useState([]);
+    const [minCursor, setMinCursor] = useState(0);
     useEffect(() => {
         const fetchApi = async () => {
             try {
-                const result = await userFollowingListService.getFollowingList(userId);
-                setUserFollowingList(result?.followings || []);
-                setHasMore(result.hasMore);
+                const result = await userFollowingListService.getFollowingList({ secUid: secUid });
+                setUserFollowingList(result?.userList || []);
+                setMinCursor(result?.minCursor || 0);
             } catch (error) {
                 console.error('Error fetching following list:', error);
                 setUserFollowingList([]);
@@ -36,31 +36,29 @@ function Sidebar() {
         };
 
         fetchApi();
-    }, [userId]);
+    }, [secUid]);
 
     const handleLoadMore = async () => {
-        if (!hasMore) {
-            try {
-                const result = await userFollowingListService.getFollowingList(userId);
-                setUserFollowingList(result?.followings || []);
-                setHasMore(result.hasMore);
-            } catch (error) {
-                console.error('Error loading more data:', error.message);
-            } finally {
+        setIsLoading(true);
+        try {
+            const result = await userFollowingListService.getFollowingList({
+                secUid: secUid,
+                minCursor: minCursor,
+            });
+
+            if (minCursor > 0) {
+                setUserFollowingList((prev) => [...prev, ...(result?.userList || [])]);
+            } else {
+                setUserFollowingList(result?.userList || []);
             }
-        } else {
-            setIsLoading(true);
-            try {
-                const result = await userFollowingListService.getFollowingList(userId, '50');
-                setUserFollowingList(result?.followings || []);
-                setHasMore(result.hasMore);
-            } catch (error) {
-                console.error('Error loading more data:', error.message);
-            } finally {
-                setIsLoading(false);
-            }
+            setMinCursor(0);
+        } catch (error) {
+            console.error('Error loading more data:', error.message);
+        } finally {
+            setIsLoading(false);
         }
     };
+
     return (
         <div className={styles['side-nav-container']}>
             <div className={styles['scroll-container']}>
@@ -108,22 +106,22 @@ function Sidebar() {
                     <div className={styles['following-container']}>
                         <h2 className={styles['title']}>Các tài khoản Đã follow</h2>
                         <ListUser>
-                            {userFollowingList.map((user) => (
+                            {userFollowingList?.map((data) => (
                                 <UserItem
-                                    key={user.id}
-                                    avatar={user.avatar}
-                                    nickname={user.nickname}
-                                    unique_id={user.unique_id}
-                                    verified={user.verified}
+                                    key={data.user.id}
+                                    avatar={data.user.avatarThumb}
+                                    nickname={data.user.nickname}
+                                    unique_id={data.user.uniqueId}
+                                    verified={data.user.verified}
                                 />
                             ))}
                         </ListUser>
                         {!isLoading && (
                             <button onClick={handleLoadMore} className={styles['following-see-more']}>
-                                {userFollowingList.length > 5 && (hasMore ? 'Xem thêm' : 'Ẩn bớt')}
+                                {minCursor > 0 ? 'Xem thêm' : 'Ẩn bớt'}
                             </button>
                         )}
-                        {isLoading && <p>Đang tải...</p>}
+                        {isLoading && <p className={styles['text-loading']}>Đang tải...</p>}
                     </div>
                     <div className={styles['footer-container']}>
                         <div className={styles['footer-banner']}>
@@ -144,222 +142,8 @@ function Sidebar() {
                             </a>
                         </div>
                         <h4 className={styles['link-list-header']}>Công ty</h4>
-                        {/* <div class="css-1lepjzi-DivLinkContainer e138hxzu0">
-                            <a
-                                href="https://www.tiktok.com/about?lang=vi-VN"
-                                data-e2e="page-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Giới thiệu
-                            </a>
-                            <a
-                                href="https://newsroom.tiktok.com?lang=vi-VN"
-                                data-e2e="page-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Phòng tin tức
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/about/contact?lang=vi-VN"
-                                data-e2e="page-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Liên hệ
-                            </a>
-                            <a
-                                href="https://careers.tiktok.com?lang=vi-VN"
-                                data-e2e="page-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Nghề nghiệp
-                            </a>
-                        </div> */}
                         <h4 className={styles['link-list-header']}>Chương trình</h4>
-                        {/* <div class="css-1lepjzi-DivLinkContainer e138hxzu0">
-                            <a
-                                href="https://www.tiktok.com/forgood?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                TikTok for Good
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/business/?amp%3Battr_medium=tt_official_site_guidance&amp;amp%3Brefer=tiktok_web&amp;attr_source=tt_official_site&amp;lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Quảng cáo
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/live/creator-networks/vi-VN?enter_from=tiktok_official&amp;lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Đại lý TikTok LIVE
-                            </a>
-                            <a
-                                href="https://developers.tiktok.com/?lang=vi-VN&amp;refer=tiktok_web"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Nhà phát triển
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/transparency?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Minh bạch
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/tiktok-rewards/vi-VN?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Phần thưởng trên TikTok
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/embed?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Nội dung được nhúng từ TikTok
-                            </a>
-                            <a
-                                href="https://www.soundon.global/?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                SoundOn Music Distribution
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/live?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                TikTok Live
-                            </a>
-                            <a
-                                href="https://shop-vn.tiktok.com/?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                TikTok Shop
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/download/vi-VN?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Tải TikTok về
-                            </a>
-                        </div> */}
                         <h4 className={styles['link-list-header']}>Điều khoản và chính sách</h4>
-                        {/* <div class="css-1lepjzi-DivLinkContainer e138hxzu0">
-                            <a
-                                href="https://www.tiktok.com/forgood?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                TikTok for Good
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/business/?amp%3Battr_medium=tt_official_site_guidance&amp;amp%3Brefer=tiktok_web&amp;attr_source=tt_official_site&amp;lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Quảng cáo
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/live/creator-networks/vi-VN?enter_from=tiktok_official&amp;lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Đại lý TikTok LIVE
-                            </a>
-                            <a
-                                href="https://developers.tiktok.com/?lang=vi-VN&amp;refer=tiktok_web"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Nhà phát triển
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/transparency?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Minh bạch
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/tiktok-rewards/vi-VN?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Phần thưởng trên TikTok
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/embed?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Nội dung được nhúng từ TikTok
-                            </a>
-                            <a
-                                href="https://www.soundon.global/?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                SoundOn Music Distribution
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/live?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                TikTok Live
-                            </a>
-                            <a
-                                href="https://shop-vn.tiktok.com/?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                TikTok Shop
-                            </a>
-                            <a
-                                href="https://www.tiktok.com/download/vi-VN?lang=vi-VN"
-                                data-e2e="program-link"
-                                target="_blank"
-                                class="css-10mwwjx-StyledNavLink e138hxzu1 link-a11y-focus"
-                            >
-                                Tải TikTok về
-                            </a>
-                        </div> */}
                         <span data-e2e="copyright" className={styles['span-copy-right']}>
                             © 2025 TikTok
                         </span>
