@@ -120,7 +120,7 @@ function Sidebar() {
                         </ListUser>
                         {!isLoading && (
                             <button onClick={handleLoadMore} className={styles['following-see-more']}>
-                                {hasMore ? 'Xem thêm' : 'Ẩn bớt'}
+                                {userFollowingList.length > 5 && (hasMore ? 'Xem thêm' : 'Ẩn bớt')}
                             </button>
                         )}
                         {isLoading && <p>Đang tải...</p>}
